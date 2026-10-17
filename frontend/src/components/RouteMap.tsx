@@ -26,29 +26,28 @@ export const RouteMap: React.FC<RouteMapProps> = ({
   useEffect(() => {
     if (!mapContainerRef.current || mapRef.current) return;
 
-    // Stadia Maps Alidade Smooth Dark — free, no API key required
     const map = new maplibregl.Map({
       container: mapContainerRef.current,
       style: {
         version: 8,
         sources: {
-          'stadia-dark': {
+          'mapbox-dark': {
             type: 'raster',
             tiles: [
-              'https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}.png',
+              `https://api.mapbox.com/styles/v1/mapbox/dark-v11/tiles/{z}/{x}/{y}?access_token=${import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}`,
             ],
-            tileSize: 256,
-            attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            maxzoom: 20,
+            tileSize: 512,
+            attribution: '&copy; <a href="https://www.mapbox.com/">Mapbox</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxzoom: 22,
           },
         },
         layers: [
           {
-            id: 'stadia-dark-layer',
+            id: 'mapbox-dark-layer',
             type: 'raster',
-            source: 'stadia-dark',
+            source: 'mapbox-dark',
             minzoom: 0,
-            maxzoom: 20,
+            maxzoom: 22,
           },
         ],
       },

@@ -31,7 +31,7 @@ media/
 # Environment variables
 .env
 .env.*
-!.env.example
+.env.example
 
 # Testing & Coverage
 .pytest_cache/
