@@ -93,14 +93,18 @@ class TripAnalysisOrchestrator:
 
         async def fetch_chunk(chunk):
             async with sem:
-                for attempt in range(3):
+                for attempt in range(4):
                     try:
                         return chunk, await self.weather_service.fetch_weather_for_locations(chunk)
                     except Exception as exc:
                         logger.warning("Weather fetch attempt %d failed: %s", attempt + 1, exc)
-                        if attempt == 2:
-                            raise
-                return chunk, []
+                        if attempt < 3:
+                            await asyncio.sleep(0.5 * (2 ** attempt))  # 0.5s, 1s, 2s backoff
+                        else:
+                            logger.error("Exhausted retries for chunk: %s", exc)
+                            # Return empty for this chunk rather than crashing the whole analysis
+                            return chunk, [{}] * len(chunk)
+                return chunk, [{}] * len(chunk)
 
         # Fire all chunks (bounded by semaphore)
         results = await asyncio.gather(*[fetch_chunk(c) for c in chunks])
