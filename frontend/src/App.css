@@ -1,0 +1,243 @@
+/* ─────────────────────────────────────
+   WeatherRoute App — Global Styles
+───────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --clr-bg:        #0d1117;
+  --clr-surface:   #161b22;
+  --clr-surface2:  #1c2230;
+  --clr-border:    rgba(255,255,255,.08);
+  --clr-text:      #e6edf3;
+  --clr-muted:     #8b949e;
+  --clr-accent:    #3b82f6;
+  --clr-accent2:   #60a5fa;
+  --clr-green:     #22c55e;
+  --clr-yellow:    #eab308;
+  --clr-orange:    #f97316;
+  --clr-red:       #ef4444;
+  --clr-danger:    #dc2626;
+  --radius:        10px;
+  --radius-lg:     16px;
+  --shadow:        0 4px 24px rgba(0,0,0,.5);
+  font-family: 'Inter', system-ui, sans-serif;
+
+  /* Risk level colors — used by ForecastSlider legend & heatmap */
+  --risk-low:       #10b981;
+  --risk-moderate:  #f59e0b;
+  --risk-high:      #f97316;
+  --risk-severe:    #ef4444;
+  --risk-no-travel: #9333ea;
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--clr-bg);
+  color: var(--clr-text);
+}
+
+/* ── App Shell ── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.app-header {
+  flex-shrink: 0;
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+  padding: 0 20px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+
+.header-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.logo-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--clr-accent2);
+  line-height: 1.1;
+}
+
+.logo-sub {
+  font-size: 11px;
+  color: var(--clr-muted);
+  font-weight: 400;
+}
+
+.trip-badge {
+  background: rgba(59,130,246,.15);
+  border: 1px solid rgba(59,130,246,.3);
+  color: var(--clr-accent2);
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ── Main Layout ── */
+.app-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 360px;
+  min-width: 320px;
+  flex-shrink: 0;
+  background: var(--clr-surface);
+  border-right: 1px solid var(--clr-border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+}
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--clr-border); border-radius: 4px; }
+
+/* ── Map Section ── */
+.map-section {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Map Placeholder ── */
+.map-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--clr-bg);
+}
+
+.map-placeholder.error-bg {
+  background: rgba(220,38,38,.05);
+}
+
+.placeholder-content {
+  text-align: center;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.placeholder-icon { font-size: 56px; }
+
+.placeholder-content h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--clr-text);
+}
+
+.placeholder-content p {
+  font-size: 14px;
+  color: var(--clr-muted);
+  line-height: 1.6;
+}
+
+/* ── Loading Panel ── */
+.loading-panel {
+  margin: 0 12px;
+  background: var(--clr-surface2);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--clr-accent2);
+}
+
+.loading-sub {
+  font-size: 12px;
+  color: var(--clr-muted);
+  line-height: 1.5;
+}
+
+/* ── Error Panel ── */
+.error-panel {
+  margin: 0 12px;
+  background: rgba(220,38,38,.1);
+  border: 1px solid rgba(220,38,38,.3);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.error-icon { font-size: 28px; }
+.error-title { font-size: 14px; font-weight: 600; color: var(--clr-red); }
+.error-msg { font-size: 12px; color: var(--clr-muted); line-height: 1.5; }
+
+/* ── Spinner ── */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(59,130,246,.2);
+  border-top-color: var(--clr-accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+
+.spinner.large {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Utility ── */
+button { cursor: pointer; }
+a { color: var(--clr-accent2); text-decoration: none; }
