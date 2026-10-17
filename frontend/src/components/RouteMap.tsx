@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import * as maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
 import type { RouteOption, HeatmapGridPoint } from '../types';
+
+// Explicitly register worker URL so Vite production bundles on Vercel load web worker properly
+maplibregl.setWorkerUrl(workerUrl);
 
 interface RouteMapProps {
   routes: RouteOption[];
